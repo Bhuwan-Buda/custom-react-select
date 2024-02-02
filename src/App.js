@@ -1,23 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import "./App.css";
+import SelectField from "./Components/Select";
+import { simpleData } from "./dummyData";
 
 function App() {
+  const [value, setValue] = useState(null);
+  const handleChange = (selected) => {
+    setValue(selected);
+  }
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h3>Select tag </h3>
+      <SelectField
+        name="fruit"
+        label="Fruits"
+        multi={true}
+        value={value}
+        options={simpleData}
+        onChange={(selected) => handleChange(selected)}
+        getOptionLabel={(option) => `${option?.label}`}
+        getOptionValue={(option) => option.id}
+      />
     </div>
   );
 }
